@@ -2,6 +2,8 @@ body {
   background-color: black;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 0px;
   margin-top: 25px;
 }
@@ -37,4 +39,10 @@ body {
 
 #buttons-container div button {
   justify-self: center;
+}
+
+.button-css {
+  color: white;
+  border: 2px dashed green;
+  padding: 10px;
 }
