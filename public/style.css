@@ -199,10 +199,12 @@ main {
 
 #buttons-container div button {
   justify-self: center;
+  transition: all 0.4s;
 }
 
 #buttons-container div button:hover {
   cursor: pointer;
+  transform: translateY(-2px);
 }
 
 .cssStyling {
