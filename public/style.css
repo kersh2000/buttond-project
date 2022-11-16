@@ -57,6 +57,10 @@ nav li {
   margin: 6px 10px;
 }
 
+.nav-toggle-label:hover {
+  cursor: pointer;
+}
+
 nav button {
   color: white;
   background-color: #414c50;
@@ -74,6 +78,7 @@ nav button {
     color: #39ace7;
     padding: 5px 60px;
     background-color: white;
+    cursor: pointer;
   }
 
   nav button:active {
@@ -114,7 +119,7 @@ main {
   width: 100%;
   margin-bottom: 20px;
   display: grid;
-  grid-template-columns: 20px auto 1fr auto 20px;
+  grid-template-columns: 20px auto 1fr auto 1fr auto 20px;
 }
 
 .settings-btn {
@@ -130,7 +135,13 @@ main {
 }
 
 .skip {
+  grid-column-start: 6;
+}
+
+.new-btn {
   grid-column-start: 4;
+  margin-right: 30px;
+  display: none;
 }
 
 .settings-btn:hover{
@@ -160,6 +171,13 @@ main {
   flex-wrap: wrap;
   row-gap: 20px;
   column-gap: 20px;
+}
+
+.attr-descriptor {
+  color: white;
+  margin: 0;
+  width: 100%;
+  text-align: center;
 }
 
 #buttons-container div {
