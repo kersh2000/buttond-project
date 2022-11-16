@@ -18,6 +18,7 @@ function finalButton() {
 }
 
 function addButtonDB() {
+  document.querySelector('#final-btn').disabled = true;
   const stylingText = `button_name { ${Styling.finalStyling}}`;
   const style = Styling.getFancyStyling(stylingText);
   document.querySelector('.cssStyling').innerHTML += `<p class="button-css">${style}</p>`;
@@ -35,11 +36,15 @@ function next(id, skip = false) {
   const btn = document.querySelector(`#${id}`);
   if (!skip) {
     styling.addAttr(btn);
-    Styling.styleCounter ++;
-    if (Styling.styleCounter === Object.keys(Styling.cssStyles).length) {
-      finalButton();
-      return;
-    }
+  }
+  Styling.styleCounter ++;
+  if (Styling.styleCounter === Object.keys(Styling.cssStyles).length) {
+    finalButton();
+    refreshBtn.disabled = true;
+    refreshBtn.style.opacity = '0.5';
+    skipBtn.disabled = true;
+    skipBtn.style.opacity = '0.5';
+    return;
   }
   buttons();
 }
@@ -51,6 +56,16 @@ main.style.marginTop = header.clientHeight + 'px';
 window.addEventListener('resize', () => {
   checkbox.checked = false;
   main.style.marginTop = header.clientHeight + 'px';
+});
+
+const refreshBtn = document.querySelector('.refresh');
+refreshBtn.addEventListener('click', () => {
+  buttons();
+});
+
+const skipBtn = document.querySelector('.skip');
+skipBtn.addEventListener('click', () => {
+  next('btn-1', true);
 });
 
 // const numOfRandButtons = 50;
