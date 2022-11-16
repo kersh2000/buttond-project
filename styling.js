@@ -1,6 +1,7 @@
 class Styling {
 
   static finalStyling = 'margin: 10px; font-size: 20px;';
+  static stylesObject = {'margin': '10px', 'font-size': '20px'};
   static styleCounter = 0;
   static numOfRandBtns;
   static cssStyles;
@@ -126,15 +127,25 @@ class Styling {
   }
 
   addAttr(btn) {
-    Styling.finalStyling = btn.getAttribute('style');
-    this.removeDups();
+    const style = btn.getAttribute('style');
+    const attr = Object.keys(Styling.cssStyles)[Styling.styleCounter].replace(/[0-9]/g, '');
+    const lastAttr = style.slice((style.lastIndexOf(` ${attr}: `) + attr.length + 3), -1);
+    const newStyle = this.checkAttr(attr, lastAttr);
+    Styling.finalStyling = newStyle;
     if (Styling.styleCounter === 2 && btn.style.borderStyle === 'none') {
       Styling.styleCounter += 2;
     }
+    btn.setAttribute('style', Styling.finalStyling);
   }
 
-  removeDups() {
-    console.log(`finalStyling = ${Styling.finalStyling}`);
+  checkAttr(name, value) {
+    Styling.stylesObject[name] = value;
+    let text = JSON.stringify(Styling.stylesObject);
+    text = text.replace(/[\}\{"]/g, '');
+    text = text.replace(/:/g, ': ');
+    text = text.replace(/,/g, '; ');
+    text += ';';
+    return text;
   }  
 }
 
