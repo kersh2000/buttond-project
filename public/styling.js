@@ -27,7 +27,7 @@ class Styling {
 
   static reset() {
     Styling.finalStyling = 'margin: 10px; font-size: 20px;';
-    Styling.stylesObject = {'margin': '10px', 'font-size': '20px'};
+    Styling.stylesObject = {'font-size': '20px'};
     Styling.styleCounter = 0;
   }
   
@@ -58,8 +58,9 @@ class Styling {
       'border-width': ['0px', '1px', '2px', '3px', '4px', '5px'],
       'border-radius': ['none', '3px', '7px', '11px', '100vw'],
       'box-shadow': [this.randomBoxShadow],
-      'padding': [this.paddingH, 10],
-      'padding2': [this.paddingV, 10]
+      'aspect-ratio': ['1/3', '1/2', '1/1', '2/1', '3/1'],
+      'padding1': [this.paddingH, 10],
+      'padding2': [this.paddingV, 10],
     };
     Styling.numOfRandBtns = numOfRandBtns;
     Styling.reset();
@@ -140,6 +141,8 @@ class Styling {
     const newStyle = this.checkAttr(attr, lastAttr);
     Styling.finalStyling = newStyle;
     if (Styling.styleCounter === 2 && btn.style.borderStyle === 'none') {
+      Styling.styleCounter += 2;
+    } else if (Styling.styleCounter === 7 && btn.style.aspectRatio) {
       Styling.styleCounter += 2;
     }
     btn.setAttribute('style', Styling.finalStyling);
