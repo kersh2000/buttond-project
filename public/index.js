@@ -81,6 +81,36 @@ newBtn.addEventListener('click', () => {
   buttons();
 });
 
+const homePage = document.querySelector('.home-page');
+const pickPage = document.querySelector('.pick-page');
+const dbPage = document.querySelector('.db-page');
+
+function showDbPage() {
+  homePage.style.display = 'none';
+  pickPage.style.display = 'none';
+  dbPage.style.display = 'flex';
+}
+
+function showPickPage() {
+  homePage.style.display = 'none';
+  pickPage.style.display = 'flex';
+  dbPage.style.display = 'none';
+}
+
+function showHomePage() {
+  homePage.style.display = 'flex';
+  pickPage.style.display = 'none';
+  dbPage.style.display = 'none';
+}
+
+const homeBtn = document.querySelector('.home-btn');
+const pickBtn = document.querySelector('.pick-btn');
+const dbBtn = document.querySelector('.db-btn');
+
+homeBtn.addEventListener('click', showHomePage);
+pickBtn.addEventListener('click', showPickPage);
+dbBtn.addEventListener('click', showDbPage);
+
 // const numOfRandButtons = 50;
 // const mainContainer = document.querySelector('#buttons-container');
 // let finalStyling = 'margin: 10px; font-size: 20px;';
