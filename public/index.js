@@ -11,7 +11,7 @@ function finalButton() {
       <button id="final-btn" class="final-btn" style="${Styling.finalStyling}">
       Click Here!
       </button>
-      <p>You're Button!</p>
+      <p>Your Button!</p>
     </div>
     `;
   document.querySelector('#final-btn').addEventListener('click', addButtonDB);
@@ -21,7 +21,7 @@ function addButtonDB() {
   document.querySelector('#final-btn').disabled = true;
   const stylingText = `button_name { ${Styling.finalStyling}}`;
   const style = Styling.getFancyStyling(stylingText);
-  document.querySelector('.cssStyling').innerHTML += `<p class="button-css">${style}</p>`;
+  document.querySelector('.cssStyling').innerHTML = `<p class="button-css">${style}</p>`;
 }
 
 function buttons() {
@@ -44,6 +44,7 @@ function next(id, skip = false) {
     refreshBtn.style.opacity = '0.5';
     skipBtn.disabled = true;
     skipBtn.style.opacity = '0.5';
+    newBtn.style.display = 'block';
     return;
   }
   buttons();
@@ -66,6 +67,18 @@ refreshBtn.addEventListener('click', () => {
 const skipBtn = document.querySelector('.skip');
 skipBtn.addEventListener('click', () => {
   next('btn-1', true);
+});
+
+const newBtn = document.querySelector('.new-btn');
+newBtn.addEventListener('click', () => {
+  newBtn.style.display = 'none';
+  Styling.reset();
+  document.querySelector('.cssStyling').innerHTML = ``;
+  refreshBtn.disabled = false;
+  refreshBtn.style.opacity = '1';
+  skipBtn.disabled = false;
+  skipBtn.style.opacity = '1';
+  buttons();
 });
 
 // const numOfRandButtons = 50;
