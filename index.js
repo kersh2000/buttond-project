@@ -20,7 +20,7 @@ function finalButton() {
 function addButtonDB() {
   const stylingText = `button_name { ${Styling.finalStyling}}`;
   const style = Styling.getFancyStyling(stylingText);
-  document.querySelector('body').innerHTML += `<p class="button-css">${style}</p>`;
+  document.querySelector('.cssStyling').innerHTML += `<p class="button-css">${style}</p>`;
 }
 
 function buttons() {
@@ -43,6 +43,15 @@ function next(id, skip = false) {
   }
   buttons();
 }
+
+const main = document.querySelector('main');
+const header = document.querySelector('header');
+const checkbox = document.querySelector('.nav-toggle');
+main.style.marginTop = header.clientHeight + 'px';
+window.addEventListener('resize', () => {
+  checkbox.checked = false;
+  main.style.marginTop = header.clientHeight + 'px';
+});
 
 // const numOfRandButtons = 50;
 // const mainContainer = document.querySelector('#buttons-container');
