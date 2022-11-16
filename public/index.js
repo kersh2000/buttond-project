@@ -23,7 +23,7 @@ function addButtonDB() {
   const stylingText = `button_name { ${Styling.finalStyling}}`;
   const style = Styling.getFancyStyling(stylingText);
   document.querySelector('.cssStyling').innerHTML = `<p class="button-css">Quick CSS Copy:<br><code>${style}</code></p>`;
-  fetch('http://localhost:5000/').then(res => console.log(res));
+  fetch('http://localhost:5000/').then(res => { return res.json} ).then(data => { console.log(data) });
 }
 
 function buttons() {
