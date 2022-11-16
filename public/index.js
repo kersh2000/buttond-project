@@ -1,5 +1,6 @@
 import Styling from './styling.js';
 const styling = new Styling(50);
+let history = new Array();
 
 const mainContainer = document.querySelector('#buttons-container');
 buttons();
@@ -21,7 +22,8 @@ function addButtonDB() {
   document.querySelector('#final-btn').disabled = true;
   const stylingText = `button_name { ${Styling.finalStyling}}`;
   const style = Styling.getFancyStyling(stylingText);
-  document.querySelector('.cssStyling').innerHTML = `<p class="button-css">${style}</p>`;
+  document.querySelector('.cssStyling').innerHTML = `<p class="button-css">Quick CSS Copy:<br><code>${style}</code></p>`;
+  fetch('http://localhost:5000/').then(res => console.log(res));
 }
 
 function buttons() {
@@ -34,17 +36,24 @@ function buttons() {
 
 function next(id, skip = false) {
   const btn = document.querySelector(`#${id}`);
+  backBtn.removeAttribute('disabled');
+  backBtn.style.opacity = '1';
+  newBtn.removeAttribute('disabled');
+  newBtn.style.opacity = '1';
   if (!skip) {
     styling.addAttr(btn);
   }
+  history.push(Styling.finalStyling);
   Styling.styleCounter ++;
   if (Styling.styleCounter === Object.keys(Styling.cssStyles).length) {
     finalButton();
+    newBtn.innerHTML = 'NEW';
     refreshBtn.disabled = true;
     refreshBtn.style.opacity = '0.5';
     skipBtn.disabled = true;
     skipBtn.style.opacity = '0.5';
-    newBtn.style.display = 'block';
+    backBtn.disabled = true;
+    backBtn.style.opacity = '0.5';
     return;
   }
   buttons();
@@ -71,14 +80,31 @@ skipBtn.addEventListener('click', () => {
 
 const newBtn = document.querySelector('.new-btn');
 newBtn.addEventListener('click', () => {
-  newBtn.style.display = 'none';
+  history = new Array();
+  newBtn.innerHTML = '&#8810; Reset';
+  newBtn.style.display = 'Reset';
   Styling.reset();
   document.querySelector('.cssStyling').innerHTML = ``;
   refreshBtn.disabled = false;
   refreshBtn.style.opacity = '1';
   skipBtn.disabled = false;
   skipBtn.style.opacity = '1';
+  backBtn.disabled = true;
+  backBtn.style.opacity = '0.5';
+  newBtn.disabled = true;
+  newBtn.style.opacity = '0.5';
   buttons();
+});
+
+const backBtn = document.querySelector('.back-btn');
+backBtn.addEventListener('click', () => {
+  history.pop();
+  Styling.styleCounter --;
+  buttons();
+  if (history.length === 0) {
+    backBtn.disabled = 'true';
+    backBtn.style.opacity = '0.5';
+  }
 });
 
 const homePage = document.querySelector('.home-page');
@@ -107,104 +133,15 @@ const homeBtn = document.querySelector('.home-btn');
 const pickBtn = document.querySelector('.pick-btn');
 const dbBtn = document.querySelector('.db-btn');
 
-homeBtn.addEventListener('click', showHomePage);
-pickBtn.addEventListener('click', showPickPage);
-dbBtn.addEventListener('click', showDbPage);
-
-// const numOfRandButtons = 50;
-// const mainContainer = document.querySelector('#buttons-container');
-// let finalStyling = 'margin: 10px; font-size: 20px;';
-// let counter = 0;
-// const cssStyles = {
-//   'background-color': [randomColor],
-//   'color': [randomColor],
-//   'border-style': ['solid', 'none'],
-//   'border-color': [randomColor],
-//   'border-width': ['0px', '1px', '2px', '3px'],
-//   'border-radius': ['0px', '0px', '7px', '100vw'],
-//   'box-shadow': [randomBoxShadow],
-// };
-
-// function randomColor() {
-//   const randomColor = Math.floor(Math.random()*16777215).toString(16);
-//   return '#' + randomColor;
-// }
-
-// function randomBoxShadow() {
-//   const color = randomColor();
-//   const hOffset = (2 + Math.ceil(Math.random() * 2)) + 'px';
-//   const vOffset = (2 + Math.ceil(Math.random() * 2)) + 'px';
-//   const blur = Math.floor(Math.random() * 6) + 'px';
-//   return `${hOffset} ${vOffset} ${blur} ${color}`;
-// }
-
-// function addRandomButtons(num) {
-//   mainContainer.innerHTML = '';
-//   for (let i = 0; i < numOfRandButtons; i++) {
-//     const attr = Object.keys(cssStyles)[num];
-//     const values = cssStyles[attr];
-//     let value = values[Math.floor(Math.random() * values.length)];
-//     if (typeof(value) === 'function') {
-//       value = value();
-//     }
-//     const styling = ` ${attr}: ${value};`;
-//     mainContainer.innerHTML += `
-//       <div class="rand-ctr-${i + 1}" style="background-color: white; color: black;">
-//         <button id="btn-${i + 1}" onclick="next(this.id)" class="rand-btn-${i + 1}" style="${styling} ${finalStyling}">
-//         Click Here!
-//         </button>
-//         <p>Randm Button ${i + 1}</p>
-//       </div>
-//       `;
-//   }
-// }
-
-// function finalButton() {
-//   mainContainer.innerHTML = '';
-//   mainContainer.innerHTML += `
-//     <div class="final-ctr" style="background-color: white; color: black;">
-//       <button id="final-btn" class="final-btn" onclick="addButtonDB()" style="${finalStyling}">
-//       Click Here!
-//       </button>
-//       <p>You're Button!</p>
-//     </div>
-//     `;
-// }
-
-// function addButtonDB() {
-//   const styling = `button_name { ${finalStyling}}`;
-//   const style = fancy(styling);
-//   document.querySelector('body').innerHTML += `<p class="button-css">${style}</p>`;
-// }
-
-// function fancy(styling) {
-//   let text = "";
-//   let counter = 0;
-//   for (let chr of styling) {
-//     counter ++;
-//     text += chr;
-//     if (chr === '{' || chr === ';') {
-//       text += '<br>';
-//       if (counter !== styling.length - 1) {
-//         text += '&emsp;';
-//       }
-//     }
-//   }
-//   return text;
-// }
-
-// addRandomButtons(counter);
-
-// function next(id, skip = false) {
-//   console.log(`#${id}`);
-//   const btn = document.querySelector(`#${id}`);
-//   if (!skip) {
-//     finalStyling = btn.getAttribute('style');
-//     counter ++;
-//     if (counter === Object.keys(cssStyles).length) {
-//       finalButton();
-//       return;
-//     }
-//   }
-//   addRandomButtons(counter)
-// }
+homeBtn.addEventListener('click', () => {
+  showHomePage();
+  checkbox.checked = false;
+});
+pickBtn.addEventListener('click', () => {
+  showPickPage();
+  checkbox.checked = false;
+});
+dbBtn.addEventListener('click', () => {
+  showDbPage();
+  checkbox.checked = false;
+});
