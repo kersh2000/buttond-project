@@ -1,8 +1,8 @@
 class Styling {
 
-  static finalStyling = 'margin: 10px; font-size: 20px;';
-  static stylesObject = {'margin': '10px', 'font-size': '20px'};
-  static styleCounter = 0;
+  static finalStyling;
+  static stylesObject;
+  static styleCounter;
   static numOfRandBtns;
   static cssStyles;
   static colors = ['black', 'white'];
@@ -23,6 +23,12 @@ class Styling {
       }
     }
     return fancyText;
+  }
+
+  static reset() {
+    Styling.finalStyling = 'margin: 10px; font-size: 20px;';
+    Styling.stylesObject = {'margin': '10px', 'font-size': '20px'};
+    Styling.styleCounter = 0;
   }
   
   static randomColor() {
@@ -56,6 +62,7 @@ class Styling {
       'padding2': [this.paddingV, 10]
     };
     Styling.numOfRandBtns = numOfRandBtns;
+    Styling.reset();
   }
 
   paddingH() {
@@ -84,7 +91,7 @@ class Styling {
   }
 
   addButtons(container) {
-    container.innerHTML = '';
+    container.innerHTML = `<p class="attr-descriptor">Select your: <code>${Object.keys(Styling.cssStyles)[Styling.styleCounter].replace(/[0-9]/g, '')}</code></p>`;
     const styles = this.getAttrValues();
     styles.forEach((style, index) => {
       container.innerHTML += `
