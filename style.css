@@ -1,15 +1,111 @@
 body {
-  background-color: black;
+  margin: 0;
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+  background-color: #333333;
+}
+
+
+header {
+  background-color: #222222;
+  color: white;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+}
+
+.header-content {
+  width: 100vw;
+  max-width: 1000px;
+  background-color: #222222;
+}
+
+.header-content p {
+  margin: 20px 30px;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle:checked ~ nav {
+  display: block;
+}
+
+nav {
+  background-color: #222222;
+  text-align: center;
+  display: none;
+}
+
+nav ul {
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+  width: 100vw;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 0px;
-  margin-top: 25px;
+}
+
+nav li {
+  margin: 6px 10px;
+}
+
+nav button {
+  color: white;
+  background-color: #414c50;
+  border: none;
+  border-radius: 100vw;
+  padding: 5px 10px;
+  width: fit-content;
+  align-self: center;
+  text-transform: uppercase;
+  transition: padding 0.6s, background-color 0.4s, color 0.4s;
+}
+
+@media (min-width: 1025px) {
+  nav button:hover {
+    color: #39ace7;
+    padding: 5px 60px;
+    background-color: white;
+  }
+
+  nav button:active {
+    opacity: 0.6;
+  }
+
+  nav ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .nav-toggle-label {
+    display: none;
+  }
+
+  nav {
+    display: block;
+  }
+}
+
+main {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 #buttons-container {
-  width: 100%;
+  width: 90vw;
+  padding: 20px 0;
+  margin: 0 auto;
+  align-self: center;
   max-width: 1000px;
   background-color: #30322F;
   justify-content: space-evenly;
@@ -17,7 +113,6 @@ body {
   flex-wrap: wrap;
   row-gap: 20px;
   column-gap: 20px;
-  padding: 10px;
 }
 
 #buttons-container div {
@@ -41,8 +136,15 @@ body {
   justify-self: center;
 }
 
+.cssStyling {
+  display: flex;
+  justify-content: center;
+}
+
 .button-css {
+  width: fit-content;
   color: white;
+  text-align: left;
   border: 2px dashed green;
   padding: 10px;
 }
