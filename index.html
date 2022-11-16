@@ -9,8 +9,36 @@
   <script type="module" src="./index.js" defer></script>
 </head>
 <body>
-  <section id="buttons-container">
-    <!-- Here is where our JS file will inject our button and container elements into using JS DOM -->
+  <header>
+    <section class="header-content">
+      <h1>Button Simulator</h1>
+      <p>Here, you can create your own buttons and copy over the css to your own personal projects and websites without the mess of creating and deleting css properties over and over again!</p>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span>X</span>
+      </label>
+      <nav class="header-nav">
+        <ul>
+          <li>
+            <button class="home-btn">Home</button>
+          </li>
+          <li>
+            <button class="instructions-btn">Pick A Button</button>
+          </li>
+          <li>
+            <button class="history-btn">Your Buttons</button>
+          </li>
+      </nav>
   </section>
+  </header>
+  <main>
+    <section id="buttons-container">
+      <!-- Here is where our JS file will inject our button and container elements into using JS DOM -->
+    </section>
+    <section class="cssStyling"></section>
+  </main>
+  <footer>
+
+  </footer>
 </body>
 </html>
