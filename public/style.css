@@ -40,6 +40,11 @@ nav {
   background-color: #222222;
   text-align: center;
   display: none;
+  user-select: none;
+}
+
+span {
+  user-select: none;
 }
 
 nav ul {
@@ -118,8 +123,15 @@ main {
 .button-settings {
   width: 100%;
   margin-bottom: 20px;
-  display: grid;
-  grid-template-columns: 20px auto 1fr auto 1fr auto 20px;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 8px;
+  justify-content: space-evenly;
 }
 
 .settings-btn {
@@ -129,19 +141,9 @@ main {
   border: 2px solid white;
 }
 
-.settings-btn {
+.settings-btn button {
   cursor: pointer;
   transition: all 0.2s;
-}
-
-.skip {
-  grid-column-start: 6;
-}
-
-.new-btn {
-  grid-column-start: 4;
-  margin-right: 30px;
-  display: none;
 }
 
 .settings-btn:hover{
@@ -149,16 +151,28 @@ main {
   background-color: white;
 }
 
-.skip:active {
-  transform: translateX(10px);
+.back-btn {
+  opacity: 0.5;
 }
 
-.refresh {
-  grid-column-start: 2;
+.new-btn {
+  opacity: 0.5;
+}
+
+.back-btn:active {
+  transform: translateX(-10px);
 }
 
 .refresh:active {
+  transform: translateY(10px);
+}
+
+.new-btn:active {
   transform: translateX(-10px);
+}
+
+.skip:active {
+  transform: translateX(10px);
 }
 
 #buttons-container {
