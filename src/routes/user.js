@@ -22,4 +22,15 @@ userRouter.get('/', async (req, res) => {
   }
 });
 
+userRouter.delete('/:id', async (req, res) => {
+  try {
+    const user = await User.deleteOne({
+      "_id": req.params.id
+    });
+    res.status(200).send({msg: 'Successfully deleted', user: user});
+  } catch (error) {
+    res.send(error.message);
+  }
+});
+
 module.exports = userRouter;
