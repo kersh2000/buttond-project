@@ -1,6 +1,8 @@
 import Styling from './styling.js';
+import PrintButtons from './print.js';
 const styling = new Styling(50);
-let history = new Array();
+let db = new PrintButtons();
+let history = ['font-size: 20px; '];
 
 const mainContainer = document.querySelector('#buttons-container');
 buttons();
@@ -35,6 +37,7 @@ async function addButtonDB() {
     body: JSON.stringify(data)
   });
   await response.json().then(data => console.log(data));
+  db = new PrintButtons();
 }
 
 function buttons() {
@@ -110,9 +113,10 @@ newBtn.addEventListener('click', () => {
 const backBtn = document.querySelector('.back-btn');
 backBtn.addEventListener('click', () => {
   history.pop();
-  Styling.styleCounter --;
+  Styling.styleCounter -= 1;
+  Styling.finalStyling = history[history.length - 1];
   buttons();
-  if (history.length === 0) {
+  if (history.length === 1) {
     backBtn.disabled = 'true';
     backBtn.style.opacity = '0.5';
   }
@@ -123,6 +127,7 @@ const pickPage = document.querySelector('.pick-page');
 const dbPage = document.querySelector('.db-page');
 
 function showDbPage() {
+  db.createTable();
   homePage.style.display = 'none';
   pickPage.style.display = 'none';
   dbPage.style.display = 'flex';
