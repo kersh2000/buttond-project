@@ -80,8 +80,8 @@ class Styling {
 
   randomBoxShadow() {
     const color = Styling.randomColor();
-    const hOffset = (2 + Math.floor(Math.random() * 5)) + 'px';
-    const vOffset = (2 + Math.floor(Math.random() * 5)) + 'px';
+    const hOffset = (3 + Math.floor(Math.random() * 6)) + 'px';
+    const vOffset = (3 + Math.floor(Math.random() * 6)) + 'px';
     const blur = Math.floor(Math.random() * 6) + 'px';
     return `${hOffset} ${vOffset} ${blur} ${color}`;
   }
