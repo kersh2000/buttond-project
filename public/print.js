@@ -3,7 +3,6 @@ const table = document.querySelector('.buttons-table');
 class PrintButtons {
 
   constructor() {
-    this.data = this.fetchRows();
   }
 
   async fetchRows() {
@@ -17,7 +16,7 @@ class PrintButtons {
 
   async createTable() {
     table.innerHTML = '';
-    const data = await this.data;
+    const data = await this.fetchRows();
     data.forEach((row, index) => {
 
       const tblRow = document.createElement('section');
@@ -31,6 +30,7 @@ class PrintButtons {
       deleteBtn.textContent = 'X';
       addBtn.classList.add('add-btn');
       deleteBtn.classList.add('delete-btn');
+      deleteBtn.addEventListener('click', (e) => { this.removeEntry(e) });
       options.append(addBtn, deleteBtn);
 
       const name = document.createElement('p');
@@ -43,11 +43,22 @@ class PrintButtons {
       const btn = document.createElement('button');
       btn.setAttribute('style', row['styling']);
       btn.textContent = 'Click Here!';
+      btn.id = row['_id'];
       ctr.appendChild(btn);
 
       tblRow.append(options, name, ctr);
       table.append(tblRow);
     });
+  }
+
+  async removeEntry(e) {
+    const row = e.path[2];
+    const id = row.lastElementChild.lastElementChild.id;
+    const response = await fetch(`http://localhost:5000/user/${id}`, {
+      method: 'DELETE'
+    });
+    await response.json().then(data => console.log(data));
+    table.removeChild(row);
   }
 }
 
