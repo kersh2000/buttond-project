@@ -78,32 +78,6 @@ nav button {
   transition: padding 0.6s, background-color 0.4s, color 0.4s;
 }
 
-@media (min-width: 1025px) {
-  nav button:hover {
-    color: #39ace7;
-    padding: 5px 60px;
-    background-color: white;
-    cursor: pointer;
-  }
-
-  nav button:active {
-    opacity: 0.6;
-  }
-
-  nav ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .nav-toggle-label {
-    display: none;
-  }
-
-  nav {
-    display: block;
-  }
-}
-
 main {
   background-color: black;
   display: flex;
@@ -232,4 +206,96 @@ main {
   text-align: left;
   border: 2px dashed green;
   padding: 10px;
+}
+
+.db-page {
+  width: 90vw;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons-table {
+  background-color: #30322F;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons-row {
+  background-color: #414c50;
+  border: 2px solid white;
+  padding: 10px;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  column-gap: 15px;
+}
+
+.row-options button {
+  color: white;
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 100vw;
+}
+
+.add-btn {
+  background-color: green;
+}
+
+.delete-btn {
+  background-color: red;
+}
+
+.btn-name {
+  color: white;
+}
+
+.btn-ctr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+@media (min-width: 1025px) {
+  nav button:hover {
+    color: #39ace7;
+    padding: 5px 60px;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  nav button:active {
+    opacity: 0.6;
+  }
+
+  nav ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .nav-toggle-label {
+    display: none;
+  }
+
+  nav {
+    display: block;
+  }
+
+  .buttons-row {
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+  }
+
+  .btn-ctr {
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
 }
