@@ -18,12 +18,23 @@ function finalButton() {
   document.querySelector('#final-btn').addEventListener('click', addButtonDB);
 }
 
-function addButtonDB() {
+async function addButtonDB() {
+  const data = { 
+    "name": "First Button",
+    "styling": Styling.finalStyling 
+  }
   document.querySelector('#final-btn').disabled = true;
   const stylingText = `button_name { ${Styling.finalStyling}}`;
   const style = Styling.getFancyStyling(stylingText);
   document.querySelector('.cssStyling').innerHTML = `<p class="button-css">Quick CSS Copy:<br><code>${style}</code></p>`;
-  fetch('http://localhost:5000/').then(res => { return res.json} ).then(data => { console.log(data) });
+  const response = await fetch('http://localhost:5000/user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  await response.json().then(data => console.log(data));
 }
 
 function buttons() {
