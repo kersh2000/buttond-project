@@ -29,6 +29,7 @@ class PrintButtons {
       addBtn.innerHTML = '&#10004;';
       deleteBtn.textContent = 'X';
       addBtn.classList.add('add-btn');
+      addBtn.addEventListener('click', (e) => { this.copyCss(e)});
       deleteBtn.classList.add('delete-btn');
       deleteBtn.addEventListener('click', (e) => { this.removeEntry(e) });
       options.append(addBtn, deleteBtn);
@@ -59,6 +60,14 @@ class PrintButtons {
     });
     await response.json().then(data => console.log(data));
     table.removeChild(row);
+  }
+
+  copyCss(e) {
+    const styling = e.path[2];
+    const style = styling.lastElementChild.lastElementChild.getAttribute('style');
+    const name = styling.children[1].textContent;
+    navigator.clipboard.writeText(style);
+    alert(`Button ${name} styling successfully copied to clipboard!`);
   }
 }
 
