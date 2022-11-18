@@ -10,34 +10,48 @@ buttons();
 function finalButton() {
   mainContainer.innerHTML = '';
   mainContainer.innerHTML += `
-    <div class="final-ctr" style="background-color: white; color: black;">
+    <div class="final-ctr" style="background-color: white; color: black; padding-bottom: 30px">
       <button id="final-btn" class="final-btn" style="${Styling.finalStyling}">
       Click Here!
       </button>
-      <p>Your Button!</p>
     </div>
+    <form>
+      <label for="fname" style="color: white;">Enter Name: </label>
+      <input type="text" autocomplete="off" name="fname" id="fname" required>
+      <input type="submit">
+    </form>
     `;
-  document.querySelector('#final-btn').addEventListener('click', addButtonDB);
+  document.querySelector('#final-btn').addEventListener('click', displayCss);
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const btnName = data.get('fname');
+    addButtonDB(btnName);
+  });
 }
 
-async function addButtonDB() {
-  const data = { 
-    "name": "First Button",
-    "styling": Styling.finalStyling 
-  }
+function displayCss() {
   document.querySelector('#final-btn').disabled = true;
   const stylingText = `button_name { ${Styling.finalStyling}}`;
   const style = Styling.getFancyStyling(stylingText);
   document.querySelector('.cssStyling').innerHTML = `<p class="button-css">Quick CSS Copy:<br><code>${style}</code></p>`;
-  const response = await fetch('http://localhost:5000/user', {
+}
+
+async function addButtonDB(name) {
+  const data = { 
+    "name": name,
+    "styling": Styling.finalStyling 
+  }
+  await fetch('http://localhost:5000/user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   });
-  await response.json().then(data => console.log(data));
   db = new PrintButtons();
+  alert('Button successfully added to Your Buttons!');
 }
 
 function buttons() {
